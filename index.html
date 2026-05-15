@@ -1,0 +1,1669 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>🌍 MultiTransfer - Turquie ↔ Afrique ↔ UE</title>
+<style>
+/* ============ CSS COMPLET ============ */
+*{margin:0;padding:0;box-sizing:border-box}
+:root{
+--primary:#1a73e8;--primary-dark:#1557b0;--primary-light:#e8f0fe;
+--secondary:#34a853;--accent:#fbbc04;--danger:#ea4335;
+--dark:#1a1a2e;--darker:#16213e;
+--text:#333;--text-light:#666;--text-muted:#999;
+--bg:#f0f2f5;--card:#fff;--border:#e0e0e0;
+--radius:12px;--shadow:0 2px 12px rgba(0,0,0,0.08);
+--transition:all 0.3s ease;
+}
+body{
+font-family:'Inter','Segoe UI',system-ui,-apple-system,sans-serif;
+color:var(--text);background:var(--bg);line-height:1.6;overflow-x:hidden
+}
+.container{max-width:1100px;margin:0 auto;padding:0 20px}
+
+/* ===== NAVBAR ===== */
+.navbar{
+position:fixed;top:0;width:100%;z-index:1000;
+background:rgba(255,255,255,0.95);backdrop-filter:blur(12px);
+border-bottom:1px solid var(--border);transition:var(--transition)
+}
+.navbar .container{display:flex;justify-content:space-between;align-items:center;padding:14px 20px}
+.logo{display:flex;align-items:center;gap:8px;font-size:1.3rem;font-weight:800;text-decoration:none;color:var(--dark)}
+.logo-icon{font-size:1.5rem}
+.highlight,.gradient-text{color:var(--primary)}
+.nav-links{display:flex;gap:24px}
+.nav-links a{text-decoration:none;color:var(--text);font-weight:500;font-size:0.95rem;transition:color .3s;position:relative}
+.nav-links a:hover,.nav-links a.active{color:var(--primary)}
+.nav-links a.active::after{content:'';position:absolute;bottom:-4px;left:0;width:100%;height:2px;background:var(--primary);border-radius:2px}
+.nav-auth,.nav-user{display:flex;gap:8px;align-items:center}
+.user-greeting{font-weight:600;color:var(--primary)}
+.hamburger{display:none;font-size:1.5rem;background:none;border:none;cursor:pointer;padding:4px}
+
+/* ===== BUTTONS ===== */
+.btn{
+display:inline-flex;align-items:center;justify-content:center;gap:6px;
+padding:10px 22px;border-radius:8px;font-weight:600;font-size:0.9rem;
+cursor:pointer;border:none;transition:var(--transition);text-decoration:none
+}
+.btn-primary{background:var(--primary);color:#fff}
+.btn-primary:hover{background:var(--primary-dark);transform:translateY(-1px);box-shadow:0 4px 15px rgba(26,115,232,0.3)}
+.btn-outline{background:transparent;border:2px solid var(--primary);color:var(--primary)}
+.btn-outline:hover{background:var(--primary);color:#fff}
+.btn-success{background:var(--secondary);color:#fff}
+.btn-success:hover{background:#2d8f47;transform:translateY(-1px)}
+.btn-lg{padding:14px 32px;font-size:1rem}
+.btn-sm{padding:6px 14px;font-size:0.8rem}
+.btn-full{width:100%}
+.btn-whatsapp{background:#25D366;color:#fff}
+.btn-whatsapp:hover{background:#20bd5a;transform:translateY(-1px)}
+
+/* ===== HERO ===== */
+.hero{
+padding:140px 0 80px;
+background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
+color:#fff;position:relative;overflow:hidden
+}
+.hero::before{
+content:'🌍';position:absolute;font-size:30rem;opacity:0.05;
+top:-10%;right:-5%;transform:rotate(15deg)
+}
+.hero-content{text-align:center;position:relative;z-index:1}
+.hero-badge{
+display:inline-block;padding:6px 16px;background:rgba(255,255,255,0.15);
+border-radius:20px;font-size:0.85rem;font-weight:600;margin-bottom:20px;
+backdrop-filter:blur(4px)
+}
+.hero h1{font-size:3rem;line-height:1.15;margin-bottom:16px;font-weight:800}
+.hero .gradient-text{background:linear-gradient(45deg,#fbbc04,#ff6b6b);-webkit-background-clip:text;-webkit-text-fill-color:transparent}
+.hero-subtitle{font-size:1.15rem;opacity:0.9;margin-bottom:30px;line-height:1.5}
+
+.hero-simulator{
+background:rgba(255,255,255,0.1);backdrop-filter:blur(12px);
+border-radius:var(--radius);padding:24px;max-width:580px;margin:0 auto;
+border:1px solid rgba(255,255,255,0.2)
+}
+.sim-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;font-weight:600}
+.sim-badge{font-size:0.75rem;background:rgba(255,255,255,0.2);padding:3px 10px;border-radius:12px}
+.sim-row{display:flex;gap:12px;align-items:flex-end;flex-wrap:wrap}
+.sim-field{flex:1;min-width:180px}
+.sim-field label{display:block;font-size:0.8rem;font-weight:500;opacity:0.8;margin-bottom:4px}
+.sim-input{display:flex;border-radius:8px;overflow:hidden;background:rgba(255,255,255,0.15)}
+.sim-input input,.sim-input select{
+background:transparent;border:none;padding:10px 12px;font-size:0.95rem;color:#fff;outline:none
+}
+.sim-input input{flex:1;min-width:60px}
+.sim-input input::placeholder{color:rgba(255,255,255,0.5)}
+.sim-input select option{color:initial}
+.sim-arrow{font-size:1.8rem;padding-bottom:8px;opacity:0.7}
+.sim-info{margin-top:14px;font-size:0.9rem;opacity:0.9;min-height:24px}
+.sim-info .highlight{color:var(--accent);-webkit-text-fill-color:var(--accent);font-weight:700}
+
+/* ===== SECTIONS ===== */
+.section{padding:80px 0}
+.bg-light{background:var(--bg)}
+.section-title{text-align:center;font-size:2rem;margin-bottom:8px;font-weight:700}
+.section-subtitle{text-align:center;color:var(--text-light);margin-bottom:40px;font-size:1.05rem}
+
+/* ===== CALCULATOR ===== */
+.calculator-card{
+background:var(--card);border-radius:var(--radius);padding:30px;
+max-width:700px;margin:0 auto;box-shadow:var(--shadow)
+}
+.direction-tabs{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:20px}
+.direction-tab{
+padding:8px 14px;border-radius:8px;border:1px solid var(--border);
+background:var(--bg);cursor:pointer;font-weight:500;font-size:0.85rem;
+transition:var(--transition)
+}
+.direction-tab.active,.direction-tab:hover{
+background:var(--primary);color:#fff;border-color:var(--primary)
+}
+.calc-body{margin-bottom:20px}
+.calc-form-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:16px}
+.calc-field{flex:1;min-width:140px}
+.calc-field label{display:block;font-size:0.85rem;font-weight:600;margin-bottom:4px;color:var(--text-light)}
+.calc-field input,.calc-field select{
+width:100%;padding:12px 14px;border:1px solid var(--border);
+border-radius:8px;font-size:0.95rem;outline:none;transition:border-color .3s
+}
+.calc-field input:focus,.calc-field select:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
+
+.calc-result{display:none}
+.calc-success{padding:20px;background:#f0fdf4;border-radius:var(--radius);border:1px solid #bbf7d0}
+.calc-direction{font-size:1.2rem;font-weight:700;color:var(--primary);margin-bottom:16px;text-align:center}
+.calc-flow{display:flex;align-items:center;justify-content:center;gap:16px;margin-bottom:16px;flex-wrap:wrap}
+.calc-box{text-align:center;min-width:120px}
+.calc-box .amount{font-size:1.4rem;font-weight:700;color:var(--dark)}
+.calc-box .currency{font-size:0.85rem;color:var(--text-light)}
+.calc-arrow{font-size:2rem;color:var(--primary)}
+.calc-details{background:var(--card);border-radius:8px;padding:14px;margin-bottom:16px}
+.detail-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid var(--border);font-size:0.9rem}
+.detail-row:last-child{border-bottom:none}
+.detail-row .label{color:var(--text-light)}
+.detail-row .value{font-weight:600}
+.detail-row .value.green{color:var(--secondary)}
+.detail-row .value.red{color:var(--danger)}
+
+/* ===== RATES GRID ===== */
+.rates-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:16px}
+.rate-card{
+background:var(--card);padding:20px;border-radius:var(--radius);
+text-align:center;box-shadow:var(--shadow);transition:var(--transition);
+border:1px solid var(--border)
+}
+.rate-card:hover{transform:translateY(-3px);box-shadow:0 6px 20px rgba(0,0,0,0.1)}
+.rate-card .drapeau{font-size:2rem;margin-bottom:6px}
+.rate-card .code{font-size:1.3rem;font-weight:700;color:var(--primary)}
+.rate-card .rate-value{font-size:1.1rem;color:var(--secondary);margin:6px 0;font-weight:600}
+.rate-card .rate-name{font-size:0.8rem;color:var(--text-light)}
+.loading-spinner{text-align:center;font-size:1.2rem;color:var(--text-light);padding:40px}
+
+/* ===== REGIONS ===== */
+.regions{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
+.region-card{
+background:var(--card);padding:28px;border-radius:var(--radius);
+box-shadow:var(--shadow);border:1px solid var(--border);transition:var(--transition)
+}
+.region-card:hover{transform:translateY(-3px)}
+.region-icon{font-size:2.5rem;margin-bottom:12px}
+.region-card h3{font-size:1.3rem;margin-bottom:4px}
+.region-card p{color:var(--text-light);font-size:0.9rem;margin-bottom:12px}
+.region-card ul{list-style:none}
+.region-card ul li{padding:4px 0;font-size:0.9rem;color:var(--text)}
+
+/* ===== MODAL ===== */
+.modal-overlay{
+display:none;position:fixed;top:0;left:0;width:100%;height:100%;
+background:rgba(0,0,0,0.5);z-index:2000;align-items:center;justify-content:center;
+backdrop-filter:blur(4px)
+}
+.modal-overlay.active{display:flex}
+.modal{
+background:var(--card);border-radius:var(--radius);padding:36px;
+width:90%;max-width:440px;position:relative;max-height:90vh;overflow-y:auto;
+box-shadow:0 20px 60px rgba(0,0,0,0.2);animation:modalIn .3s ease
+}
+@keyframes modalIn{from{opacity:0;transform:scale(0.95) translateY(10px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-close{
+position:absolute;top:14px;right:18px;font-size:1.6rem;
+background:none;border:none;cursor:pointer;color:var(--text-light);transition:color .3s
+}
+.modal-close:hover{color:var(--dark)}
+.modal h2{text-align:center;margin-bottom:24px}
+.auth-tabs{display:flex;margin-bottom:24px;border-bottom:2px solid var(--border)}
+.auth-tab{flex:1;padding:10px;text-align:center;font-weight:600;cursor:pointer;color:var(--text-light);border-bottom:2px solid transparent;margin-bottom:-2px;transition:var(--transition);background:none;border-top:none;border-left:none;border-right:none}
+.auth-tab.active{color:var(--primary);border-bottom-color:var(--primary)}
+.auth-form{display:none}
+.auth-form.active{display:block}
+.form-group{margin-bottom:16px}
+.form-group label{display:block;font-size:0.85rem;font-weight:600;margin-bottom:4px;color:var(--text-light)}
+.form-group input,.form-group select{
+width:100%;padding:12px 14px;border:1px solid var(--border);
+border-radius:8px;font-size:0.95rem;outline:none;transition:border-color .3s
+}
+.form-group input:focus,.form-group select:focus{border-color:var(--primary);box-shadow:0 0 0 3px var(--primary-light)}
+.form-footer{text-align:center;margin-top:16px;font-size:0.9rem;color:var(--text-light)}
+.form-footer a{color:var(--primary);text-decoration:none;font-weight:600;cursor:pointer}
+.form-footer a:hover{text-decoration:underline}
+.form-error{color:var(--danger);font-size:0.85rem;margin-top:4px;display:none}
+
+/* ===== DASHBOARD ===== */
+.dashboard{display:none;padding:100px 0 60px}
+.dash-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;flex-wrap:wrap;gap:12px}
+.dash-header h2{font-size:1.6rem}
+.dash-user{display:flex;align-items:center;gap:12px}
+
+.wallet-card,.transfer-card,.history-card{
+background:var(--card);border-radius:var(--radius);padding:24px;
+margin-bottom:20px;box-shadow:var(--shadow)
+}
+.wallet-card h3,.transfer-card h3,.history-card h3{margin-bottom:16px;font-size:1.1rem;color:var(--text-light)}
+.wallet-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:10px}
+.wallet-item{
+background:var(--bg);padding:12px;border-radius:8px;text-align:center
+}
+.wallet-item .curr{font-size:1.1rem;font-weight:700}
+.wallet-item .bal{font-size:1.3rem;font-weight:700;color:var(--primary);margin-top:2px}
+.wallet-item .bal.zero{color:var(--text-muted)}
+
+.table-wrap{overflow-x:auto}
+table{width:100%;border-collapse:collapse;font-size:0.9rem}
+th,td{padding:10px 12px;text-align:left;border-bottom:1px solid var(--border)}
+th{background:var(--bg);font-weight:600;color:var(--text-light);font-size:0.8rem;text-transform:uppercase;letter-spacing:0.5px}
+.status-badge{display:inline-block;padding:3px 10px;border-radius:12px;font-size:0.75rem;font-weight:600}
+.status-completed{background:#e8f5e9;color:#2e7d32}
+.status-pending{background:#fff3e0;color:#e65100}
+.status-processing{background:#e3f2fd;color:#1565c0}
+.status-failed{background:#fce4ec;color:#c62828}
+
+/* ===== TOAST ===== */
+.toast{
+position:fixed;bottom:24px;right:24px;padding:14px 20px;
+border-radius:10px;color:#fff;font-weight:500;font-size:0.9rem;
+z-index:3000;opacity:0;transform:translateY(20px);transition:all .4s ease;
+max-width:380px;box-shadow:0 4px 20px rgba(0,0,0,0.15)
+}
+.toast.show{opacity:1;transform:translateY(0)}
+.toast.success{background:var(--secondary)}
+.toast.error{background:var(--danger)}
+.toast.info{background:var(--primary)}
+
+/* ===== ADMIN PANEL ===== */
+.admin-panel{display:none;padding:100px 0 60px}
+.admin-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:24px}
+.admin-header h2{font-size:1.6rem}
+.admin-stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:16px;margin-bottom:24px}
+.admin-stat-card{background:var(--card);border-radius:var(--radius);padding:20px;box-shadow:var(--shadow);text-align:center}
+.admin-stat-card .stat-value{font-size:2rem;font-weight:700;color:var(--primary)}
+.admin-stat-card .stat-label{font-size:0.9rem;color:var(--text-light);margin-top:4px}
+.admin-whatsapp{background:var(--card);border-radius:var(--radius);padding:24px;margin-bottom:20px;box-shadow:var(--shadow)}
+.admin-whatsapp h3{margin-bottom:16px;font-size:1.1rem}
+.whatsapp-settings{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-end}
+.whatsapp-settings .calc-field{min-width:200px}
+
+/* ===== PENDING TRANSFERS ===== */
+.pending-card{
+background:var(--card);border-radius:var(--radius);padding:16px;
+margin-bottom:12px;box-shadow:var(--shadow);border-left:4px solid var(--accent)
+}
+.pending-card .p-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.pending-card .p-id{font-weight:600;font-size:0.85rem;color:var(--text-muted)}
+.pending-card .p-status{font-size:0.8rem;padding:3px 10px;border-radius:12px;background:#fff3e0;color:#e65100;font-weight:600}
+.pending-card .p-details{font-size:0.9rem;margin-bottom:8px}
+.pending-card .p-details div{margin-bottom:4px}
+.pending-card .p-actions{display:flex;gap:8px;flex-wrap:wrap}
+
+/* ===== FOOTER ===== */
+footer{
+background:var(--dark);color:rgba(255,255,255,0.7);padding:30px 0;
+text-align:center;font-size:0.9rem
+}
+footer a{color:var(--accent);text-decoration:none}
+
+/* ===== RESPONSIVE ===== */
+@media(max-width:768px){
+.hero h1{font-size:2rem}
+.hero{padding:120px 0 50px}
+.nav-links,.nav-auth,.nav-user{display:none}
+.hamburger{display:block}
+.nav-links.open{display:flex;flex-direction:column;position:absolute;top:100%;left:0;width:100%;background:var(--card);padding:16px;box-shadow:0 4px 12px rgba(0,0,0,0.1);gap:12px}
+.sim-row{flex-direction:column}
+.sim-arrow{transform:rotate(90deg);padding:0}
+.calc-form-row{flex-direction:column}
+.direction-tabs{justify-content:center}
+.rates-grid{grid-template-columns:repeat(2,1fr)}
+}
+</style>
+</head>
+<body>
+
+<!-- NAVBAR -->
+<nav class="navbar">
+<div class="container">
+<a href="#" class="logo" onclick="scrollToTop()"><span class="logo-icon">🌍</span>Multi<span class="highlight">Transfer</span></a>
+<div class="nav-links" id="navLinks">
+<a href="#accueil" class="active" onclick="closeMobileMenu()">Accueil</a>
+<a href="#calculateur" onclick="closeMobileMenu()">Calculateur</a>
+<a href="#tarifs" onclick="closeMobileMenu()">Taux</a>
+<a href="#pays" onclick="closeMobileMenu()">Pays</a>
+</div>
+<div class="nav-auth" id="navAuth">
+<button class="btn btn-outline btn-sm" onclick="openModal('login')">Connexion</button>
+<button class="btn btn-primary btn-sm" onclick="openModal('register')">S'inscrire</button>
+</div>
+<div class="nav-user" id="navUser" style="display:none">
+<span class="user-greeting" id="userGreeting">👤</span>
+<button class="btn btn-primary btn-sm" onclick="showDashboard()">Mon compte</button>
+<button onclick="logout()" style="background:none;border:none;cursor:pointer;font-size:1.2rem;padding:4px" title="Déconnexion">🚪</button>
+</div>
+<button class="hamburger" id="hamburger" onclick="toggleMobileMenu()">☰</button>
+</div>
+</nav>
+
+<!-- HERO -->
+<section id="accueil" class="hero">
+<div class="container">
+<div class="hero-content">
+<div class="hero-badge">🚀 Transferts instantanés · Taux en direct</div>
+<h1>Envoyez de l'argent <span class="gradient-text">partout dans le monde</span></h1>
+<p class="hero-subtitle">🇹🇷 Turquie · 🌍 Afrique · 🇪🇺 Union Européenne<br>Transferts multi-devises, taux compétitifs, frais transparents</p>
+
+<div class="hero-simulator">
+<div class="sim-header"><span>💱 Simulation rapide</span><span class="sim-badge">Sans inscription</span></div>
+<div class="sim-body">
+<div class="sim-row">
+<div class="sim-field">
+<label>J'envoie</label>
+<div class="sim-input">
+<input type="number" id="heroAmount" value="1000" min="1" oninput="heroSimulate()">
+<select id="heroFrom" onchange="heroSimulate()">
+<option value="TRY">🇹🇷 TRY</option>
+<option value="EUR">🇪🇺 EUR</option>
+<option value="XOF">🌍 XOF</option>
+<option value="NGN">🇳🇬 NGN</option>
+<option value="KES">🇰🇪 KES</option>
+</select>
+</div>
+</div>
+<div class="sim-arrow">→</div>
+<div class="sim-field">
+<label>Bénéficiaire reçoit</label>
+<div class="sim-input">
+<input type="text" id="heroResult" readonly placeholder="Résultat">
+<select id="heroTo" onchange="heroSimulate()">
+<option value="XOF">🌍 XOF</option>
+<option value="EUR">🇪🇺 EUR</option>
+<option value="TRY">🇹🇷 TRY</option>
+<option value="NGN">🇳🇬 NGN</option>
+<option value="KES">🇰🇪 KES</option>
+<option value="GHS">🇬🇭 GHS</option>
+<option value="MAD">🇲🇦 MAD</option>
+<option value="ZAR">🇿🇦 ZAR</option>
+</select>
+</div>
+</div>
+</div>
+<div class="sim-info" id="heroSimInfo"></div>
+</div>
+</div>
+</div>
+</div>
+</section>
+
+<!-- CALCULATEUR UNIVERSEL -->
+<section id="calculateur" class="section">
+<div class="container">
+<h2 class="section-title">Calculateur universel</h2>
+<p class="section-subtitle">Toutes les directions · 🇹🇷 ↔ 🌍 ↔ 🇪🇺 · Taux en direct</p>
+<div class="calculator-card">
+<div class="direction-tabs" id="directionTabs">
+<button class="direction-tab active" data-from="TRY" data-to="XOF">🇹🇷 → 🌍</button>
+<button class="direction-tab" data-from="XOF" data-to="TRY">🌍 → 🇹🇷</button>
+<button class="direction-tab" data-from="TRY" data-to="EUR">🇹🇷 → 🇪🇺</button>
+<button class="direction-tab" data-from="EUR" data-to="XOF">🇪🇺 → 🌍</button>
+<button class="direction-tab" data-from="XOF" data-to="EUR">🌍 → 🇪🇺</button>
+<button class="direction-tab" data-from="EUR" data-to="TRY">🇪🇺 → 🇹🇷</button>
+</div>
+<div class="calc-body">
+<div class="calc-form-row">
+<div class="calc-field">
+<label>Montant</label>
+<input type="number" id="calcAmount" value="1000" min="1">
+</div>
+<div class="calc-field">
+<label>Devise source</label>
+<select id="calcFrom"></select>
+</div>
+<div class="calc-field">
+<label>Devise destination</label>
+<select id="calcTo"></select>
+</div>
+</div>
+<button class="btn btn-primary btn-lg btn-full" onclick="calculateFull()">💱 Calculer</button>
+</div>
+<div class="calc-result" id="calcResult"></div>
+</div>
+</div>
+</section>
+
+<!-- TAUX EN DIRECT -->
+<section id="tarifs" class="section bg-light">
+<div class="container">
+<h2 class="section-title">Taux de change en direct</h2>
+<p class="section-subtitle">Mise à jour depuis l'API ExchangeRate-API · Base 1 TRY</p>
+<div class="rates-grid" id="ratesGrid">
+<div class="loading-spinner">⏳ Chargement des taux...</div>
+</div>
+<p style="text-align:center;margin-top:16px;font-size:0.8rem;color:var(--text-muted)">
+<a href="https://www.exchangerate-api.com" target="_blank" style="color:var(--text-muted)">Rates By Exchange Rate API</a>
+</p>
+</div>
+</section>
+
+<!-- PAYS SUPPORTÉS -->
+<section id="pays" class="section">
+<div class="container">
+<h2 class="section-title">Pays et régions supportés</h2>
+<p class="section-subtitle">+15 pays africains · Turquie · Union Européenne</p>
+<div class="regions">
+<div class="region-card">
+<div class="region-icon">🇹🇷</div>
+<h3>Turquie</h3>
+<p>Livre Turque (TRY)</p>
+<ul>
+<li>Istanbul · Ankara · Izmir</li>
+<li>Antalya · Bursa · Adana</li>
+<li>Gaziantep · Konya</li>
+</ul>
+</div>
+<div class="region-card">
+<div class="region-icon">🌍</div>
+<h3>Afrique de l'Ouest</h3>
+<p>Franc CFA (XOF) · Naira (NGN) · Cedi (GHS)</p>
+<ul>
+<li>🇨🇮 Côte d'Ivoire · 🇸🇳 Sénégal · 🇧🇯 Bénin</li>
+<li>🇲🇱 Mali · 🇳🇪 Niger · 🇧🇫 Burkina Faso</li>
+<li>🇹🇬 Togo · 🇬🇳 Guinée-Bissau · 🇳🇬 Nigeria</li>
+<li>🇬🇭 Ghana</li>
+</ul>
+</div>
+<div class="region-card">
+<div class="region-icon">🌍</div>
+<h3>Afrique Centrale & Est</h3>
+<p>Franc CFA (XAF) · Shilling (KES) · Rand (ZAR)</p>
+<ul>
+<li>🇨🇲 Cameroun · 🇬🇦 Gabon · 🇨🇬 Congo</li>
+<li>🇹🇩 Tchad · 🇨🇫 Centrafrique · 🇬🇶 Guinée Éq.</li>
+<li>🇰🇪 Kenya · 🇿🇦 Afrique du Sud</li>
+</ul>
+</div>
+<div class="region-card">
+<div class="region-icon">🌍</div>
+<h3>Afrique du Nord</h3>
+<p>Dirham (MAD) · Dinar (TND/DZD) · Livre (EGP)</p>
+<ul>
+<li>🇲🇦 Maroc · 🇹🇳 Tunisie · 🇩🇿 Algérie</li>
+<li>🇪🇬 Égypte</li>
+</ul>
+</div>
+<div class="region-card">
+<div class="region-icon">🇪🇺</div>
+<h3>Union Européenne</h3>
+<p>Euro (EUR)</p>
+<ul>
+<li>🇫🇷 France · 🇩🇪 Allemagne · 🇮🇹 Italie</li>
+<li>🇪🇸 Espagne · 🇳🇱 Pays-Bas · 🇧🇪 Belgique</li>
+<li>🇵🇹 Portugal · 🇬🇷 Grèce · 🇸🇪 Suède</li>
+<li>Et tous les pays de la zone euro</li>
+</ul>
+</div>
+<div class="region-card">
+<div class="region-icon">💳</div>
+<h3>Méthodes de paiement</h3>
+<p>Mobile Money · Virement · Wise · Cash</p>
+<ul>
+<li>📱 MTN Mobile Money (17 pays)</li>
+<li>📱 Orange Money (12 pays)</li>
+<li>📱 M-Pesa (Kenya, Tanzanie)</li>
+<li>🏦 Virement bancaire SEPA/IBAN</li>
+<li>💶 Wise (virement international)</li>
+<li>💵 Retrait cash (partenaires locaux)</li>
+</ul>
+</div>
+</div>
+</div>
+</section>
+
+<!-- MODAL AUTH -->
+<div class="modal-overlay" id="authModal">
+<div class="modal">
+<button class="modal-close" onclick="closeModal()">&times;</button>
+<h2>🌍 MultiTransfer</h2>
+<div class="auth-tabs">
+<button class="auth-tab active" data-tab="login" onclick="switchAuthTab('login')">Connexion</button>
+<button class="auth-tab" data-tab="register" onclick="switchAuthTab('register')">Inscription</button>
+</div>
+
+<form class="auth-form active" id="loginForm" onsubmit="handleLogin(event)">
+<div class="form-group">
+<label>Email</label>
+<input type="email" id="loginEmail" required placeholder="exemple@email.com">
+</div>
+<div class="form-group">
+<label>Mot de passe</label>
+<input type="password" id="loginPassword" required placeholder="••••••••">
+</div>
+<div class="form-error" id="loginError"></div>
+<button type="submit" class="btn btn-primary btn-full">Se connecter</button>
+<p class="form-footer">Pas encore de compte ? <a onclick="switchAuthTab('register')">S'inscrire</a></p>
+</form>
+
+<form class="auth-form" id="registerForm" onsubmit="handleRegister(event)">
+<div class="form-group">
+<label>Nom complet</label>
+<input type="text" id="regName" required placeholder="Votre nom">
+</div>
+<div class="form-group">
+<label>Email</label>
+<input type="email" id="regEmail" required placeholder="exemple@email.com">
+</div>
+<div class="form-group">
+<label>Téléphone</label>
+<input type="tel" id="regPhone" required placeholder="+90 5XX XXX XX XX">
+</div>
+<div class="form-group">
+<label>Mot de passe</label>
+<input type="password" id="regPassword" required minlength="6" placeholder="Minimum 6 caractères">
+</div>
+<div class="form-error" id="registerError"></div>
+<button type="submit" class="btn btn-primary btn-full">Créer mon compte</button>
+<p class="form-footer">Déjà un compte ? <a onclick="switchAuthTab('login')">Se connecter</a></p>
+</form>
+</div>
+</div>
+
+<!-- DASHBOARD USER -->
+<div class="dashboard" id="dashboard">
+<div class="container">
+<div class="dash-header">
+<h2>📊 Tableau de bord</h2>
+<div class="dash-user">
+<span id="dashUserName">👤 Utilisateur</span>
+<button class="btn btn-outline btn-sm" onclick="depositDemo()">💰 Dépôt demo</button>
+<button class="btn btn-sm" onclick="logout()" style="background:none;border:1px solid var(--border);cursor:pointer">🚪 Quitter</button>
+</div>
+</div>
+
+<div class="wallet-card">
+<h3>💼 Mon portefeuille multi-devises</h3>
+<div class="wallet-grid" id="walletGrid">
+<div class="loading-spinner" style="padding:20px">⏳ Chargement...</div>
+</div>
+</div>
+
+<div class="transfer-card">
+<h3>📤 Envoyer de l'argent</h3>
+<form id="transferForm" onsubmit="handleTransfer(event)">
+<div class="calc-form-row">
+<div class="calc-field">
+<label>Montant à envoyer</label>
+<input type="number" id="sendAmount" required min="1" step="10" placeholder="Ex: 5000">
+</div>
+<div class="calc-field">
+<label>Devise source</label>
+<select id="sendFrom">
+<option value="TRY">🇹🇷 TRY - Livre Turque</option>
+<option value="EUR">🇪🇺 EUR - Euro</option>
+<option value="XOF">🌍 XOF - Franc CFA</option>
+<option value="NGN">🇳🇬 NGN - Naira</option>
+<option value="KES">🇰🇪 KES - Shilling Kenya</option>
+<option value="GHS">🇬🇭 GHS - Cedi</option>
+</select>
+</div>
+<div class="calc-field">
+<label>Devise destination</label>
+<select id="sendTo">
+<option value="XOF">🌍 XOF - Franc CFA</option>
+<option value="EUR">🇪🇺 EUR - Euro</option>
+<option value="TRY">🇹🇷 TRY - Livre Turque</option>
+<option value="NGN">🇳🇬 NGN - Naira</option>
+<option value="KES">🇰🇪 KES - Shilling Kenya</option>
+<option value="GHS">🇬🇭 GHS - Cedi</option>
+</select>
+</div>
+</div>
+
+<div class="calc-form-row">
+<div class="calc-field" style="flex:2">
+<label>Nom complet du bénéficiaire</label>
+<input type="text" id="sendRecipient" required placeholder="Nom et prénom">
+</div>
+<div class="calc-field">
+<label>Téléphone du bénéficiaire</label>
+<input type="tel" id="sendPhone" required placeholder="+225 01 XX XX XX XX">
+</div>
+</div>
+
+<div class="calc-form-row">
+<div class="calc-field" style="flex:1">
+<label>Adresse email du bénéficiaire (optionnel)</label>
+<input type="email" id="sendBenefEmail" placeholder="email@exemple.com">
+</div>
+<div class="calc-field" style="flex:1">
+<label>Pays du bénéficiaire</label>
+<select id="sendCountry">
+<option value="CI">🇨🇮 Côte d'Ivoire</option>
+<option value="SN">🇸🇳 Sénégal</option>
+<option value="BJ">🇧🇯 Bénin</option>
+<option value="ML">🇲🇱 Mali</option>
+<option value="NE">🇳🇪 Niger</option>
+<option value="BF">🇧🇫 Burkina Faso</option>
+<option value="TG">🇹🇬 Togo</option>
+<option value="CM">🇨🇲 Cameroun</option>
+<option value="KE">🇰🇪 Kenya</option>
+<option value="NG">🇳🇬 Nigeria</option>
+<option value="GH">🇬🇭 Ghana</option>
+<option value="MA">🇲🇦 Maroc</option>
+<option value="TN">🇹🇳 Tunisie</option>
+<option value="DZ">🇩🇿 Algérie</option>
+<option value="ZA">🇿🇦 Afrique du Sud</option>
+<option value="TR">🇹🇷 Turquie</option>
+<option value="FR">🇫🇷 France</option>
+<option value="DE">🇩🇪 Allemagne</option>
+<option value="IT">🇮🇹 Italie</option>
+<option value="ES">🇪🇸 Espagne</option>
+<option value="BE">🇧🇪 Belgique</option>
+<option value="NL">🇳🇱 Pays-Bas</option>
+</select>
+</div>
+</div>
+
+<div class="calc-form-row">
+<div class="calc-field">
+<label>Ville du bénéficiaire</label>
+<input type="text" id="sendBenefCity" required placeholder="Ville">
+</div>
+<div class="calc-field">
+<label>Pièce d'identité (type + numéro)</label>
+<input type="text" id="sendBenefID" placeholder="CNI/Passeport N°123456">
+</div>
+</div>
+
+<div class="calc-form-row">
+<div class="calc-field">
+<label>Méthode de réception</label>
+<select id="sendMethod">
+<option value="mobile_money">📱 Mobile Money</option>
+<option value="bank_transfer">🏦 Virement bancaire</option>
+<option value="wise">💶 Wise (TransferWise)</option>
+<option value="cash_pickup">💵 Retrait cash</option>
+</select>
+</div>
+<div class="calc-field">
+<label>Opérateur Mobile Money</label>
+<select id="sendProvider">
+<option value="MTN">MTN Mobile Money</option>
+<option value="Orange">Orange Money</option>
+<option value="M-Pesa">M-Pesa</option>
+<option value="Moov">Moov Money</option>
+<option value="Wave">Wave</option>
+<option value="Airtel">Airtel Money</option>
+<option value="Autre">Autre</option>
+</select>
+</div>
+</div>
+
+<div class="calc-form-row" id="bankDetails" style="display:none">
+<div class="calc-field">
+<label>Banque</label>
+<input type="text" id="sendBank" placeholder="Nom de la banque">
+</div>
+<div class="calc-field">
+<label>Numéro de compte / IBAN</label>
+<input type="text" id="sendBankAccount" placeholder="FR76 XXXX XXXX XXXX">
+</div>
+</div>
+
+<div style="background:var(--bg);border-radius:8px;padding:14px;margin-bottom:10px">
+<label style="display:flex;align-items:center;gap:8px;font-size:0.9rem;cursor:pointer">
+<input type="checkbox" id="sendAcceptTerms" required>
+J'accepte que ces informations soient partagées avec l'équipe MultiTransfer pour le traitement de ma transaction
+</label>
+</div>
+
+<div id="sendPreview" style="background:var(--primary-light);border-radius:8px;padding:16px;margin-bottom:14px;display:none"></div>
+
+<button type="submit" class="btn btn-success btn-full" id="submitTransferBtn">
+📤 Valider et envoyer la demande
+</button>
+</form>
+</div>
+
+<div class="history-card">
+<h3>📜 Historique des transferts</h3>
+<div class="table-wrap">
+<table>
+<thead><tr><th>Date</th><th>Direction</th><th>Montant</th><th>Bénéficiaire</th><th>Téléphone</th><th>Pays</th><th>Méthode</th><th>Statut</th></tr></thead>
+<tbody id="historyBody">
+<tr><td colspan="8" style="text-align:center;color:var(--text-light)">Aucun transfert pour le moment</td></tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+
+<!-- ADMIN PANEL -->
+<div class="admin-panel" id="adminPanel">
+<div class="container">
+<div class="admin-header">
+<h2>🔐 Administration MultiTransfer</h2>
+<div class="dash-user">
+<span id="adminGreeting" style="font-weight:600">👤 Admin</span>
+<button class="btn btn-sm" onclick="logout()" style="background:none;border:1px solid var(--border);cursor:pointer">🚪 Quitter</button>
+</div>
+</div>
+
+<div class="admin-stats" id="adminStats">
+<div class="admin-stat-card">
+<div class="stat-value" id="statTotal">0</div>
+<div class="stat-label">📦 Transactions totales</div>
+</div>
+<div class="admin-stat-card">
+<div class="stat-value" id="statPending">0</div>
+<div class="stat-label">⏳ En attente</div>
+</div>
+<div class="admin-stat-card">
+<div class="stat-value" id="statRevenue">0</div>
+<div class="stat-label">💰 Revenu (5%) - EUR</div>
+</div>
+<div class="admin-stat-card">
+<div class="stat-value" id="statUsers">0</div>
+<div class="stat-label">👥 Utilisateurs inscrits</div>
+</div>
+</div>
+
+<div class="admin-whatsapp">
+<h3>📱 Configuration WhatsApp</h3>
+<div class="whatsapp-settings">
+<div class="calc-field">
+<label>Numéro WhatsApp (admin)</label>
+<input type="text" id="adminWhatsApp" value="+905XXXXXXXXX" placeholder="+905XXXXXXXXX">
+</div>
+<div class="calc-field">
+<label>Message personnalisé</label>
+<select id="whatsappLang">
+<option value="fr">🇫🇷 Français</option>
+<option value="en">🇬🇧 English</option>
+<option value="ar">🇸🇦 العربية</option>
+</select>
+</div>
+<button class="btn btn-whatsapp" onclick="testWhatsApp()">🔍 Tester WhatsApp</button>
+<button class="btn btn-primary" onclick="saveAdminSettings()">💾 Sauvegarder</button>
+</div>
+</div>
+
+<h3 style="margin-bottom:16px">📋 Demandes de transfert en attente</h3>
+<div id="pendingTransfers">
+<div class="loading-spinner">⏳ Chargement...</div>
+</div>
+</div>
+</div>
+
+<!-- TOAST -->
+<div class="toast" id="toast"></div>
+
+<!-- FOOTER -->
+<footer>
+<div class="container">
+<p>🌍 <strong>MultiTransfer</strong> — Plateforme de transfert d'argent Turquie ↔ Afrique ↔ Union Européenne</p>
+<p style="margin-top:8px;font-size:0.8rem">
+Taux fournis par <a href="https://www.exchangerate-api.com" target="_blank">ExchangeRate-API</a> · 
+Les transactions sont traitées manuellement via WhatsApp · Application de démonstration
+</p>
+</div>
+</footer>
+
+<script>
+// ============ CONFIGURATION ============
+const CONFIG = {
+  feePercent: 5, // 5% de bénéfices pour l'admin
+  minFeeUSD: 0.50,
+  apiBase: 'https://open.er-api.com/v6/latest',
+  adminEmail: 'admin@multitransfer.com',
+  adminPassword: 'Admin@123456',
+  adminWhatsAppDefault: '+905XXXXXXXXX', // À remplacer par votre vrai numéro
+  africanCurrencies: ['XOF','XAF','NGN','KES','GHS','MAD','ZAR','EGP','TND','DZD','MUR','RWF','UGX','ZMW','BWP','NAD','LSL','SZL','MWK','MZN','AOA','CDF','GNF','LRD','SDG','SOS','SSP','STN','TZS','ERN','ETB','DJF','KMF','CVE','GMD','MRU','SCR','SLL','MGA','BIF'],
+  majorCurrencies: ['TRY','EUR','USD','GBP','CHF','JPY','CAD','AUD','CNY'],
+  currencyNames: {
+    TRY:'Livre Turque',EUR:'Euro',USD:'Dollar US',GBP:'Livre Sterling',
+    XOF:'Franc CFA (UEMOA)',XAF:'Franc CFA (CEMAC)',NGN:'Naira Nigérian',
+    KES:'Shilling Kenyan',GHS:'Cedi Ghannéen',MAD:'Dirham Marocain',
+    ZAR:'Rand Sud-Africain',EGP:'Livre Égyptienne',TND:'Dinar Tunisien',
+    DZD:'Dinar Algérien'
+  },
+  currencyFlags: {
+    TRY:'🇹🇷',EUR:'🇪🇺',USD:'🇺🇸',GBP:'🇬🇧',XOF:'🌍',XAF:'🌍',NGN:'🇳🇬',
+    KES:'🇰🇪',GHS:'🇬🇭',MAD:'🇲🇦',ZAR:'🇿🇦',EGP:'🇪🇬',TND:'🇹🇳',DZD:'🇩🇿'
+  }
+};
+
+// ============ STATE ============
+let state = {
+  rates: null,
+  user: null,
+  token: null,
+  transfers: [],
+  users: [],
+  adminSettings: {
+    whatsapp: CONFIG.adminWhatsAppDefault,
+    lang: 'fr'
+  }
+};
+
+// ============ SAFE HTML ESCAPE ============
+function escapeHTML(str) {
+  const div = document.createElement('div');
+  div.textContent = str;
+  return div.innerHTML;
+}
+
+// ============ INIT ============
+document.addEventListener('DOMContentLoaded', async function() {
+  populateCurrencySelects();
+  setupDirectionTabs();
+  await fetchRates();
+  heroSimulate();
+  
+  // Écouter changement méthode de paiement
+  document.getElementById('sendMethod').addEventListener('change', function() {
+    const bankDetails = document.getElementById('bankDetails');
+    bankDetails.style.display = this.value === 'bank_transfer' ? 'flex' : 'none';
+  });
+  
+  // Auto-connexion si token stocké (version sécurisée)
+  const saved = localStorage.getItem('mt_session');
+  if (saved) {
+    try {
+      const decrypted = atob(saved);
+      const parsed = JSON.parse(decrypted);
+      // Vérification simple anti-tampering
+      if (parsed.checksum === btoa(JSON.stringify(parsed.user || '') + '|' + JSON.stringify(parsed.transfers || ''))) {
+        state.user = parsed.user;
+        state.transfers = parsed.transfers || [];
+        updateAuthUI();
+        
+        if (state.user && state.user.email === CONFIG.adminEmail) {
+          document.getElementById('adminPanel').style.display = 'block';
+          updateAdminPanel();
+        } else if (state.user) {
+          document.getElementById('dashboard').style.display = 'block';
+          updateDashboard();
+        }
+      } else {
+        localStorage.removeItem('mt_session');
+      }
+    } catch(e) {
+      localStorage.removeItem('mt_session');
+    }
+  }
+  
+  // Charger les utilisateurs
+  const usersData = localStorage.getItem('mt_users');
+  if (usersData) {
+    try {
+      state.users = JSON.parse(atob(usersData));
+    } catch(e) {
+      state.users = [];
+    }
+  }
+  
+  // Charger settings admin
+  const settingsData = localStorage.getItem('mt_admin_settings');
+  if (settingsData) {
+    try {
+      state.adminSettings = JSON.parse(atob(settingsData));
+    } catch(e) {}
+  }
+});
+
+// ============ CURRENCY SELECTS ============
+function populateCurrencySelects() {
+  const allCurrencies = [...CONFIG.majorCurrencies, ...CONFIG.africanCurrencies];
+  const selects = ['calcFrom','calcTo'];
+  
+  selects.forEach(id => {
+    const sel = document.getElementById(id);
+    if (!sel) return;
+    sel.innerHTML = allCurrencies.map(c => {
+      const flag = CONFIG.currencyFlags[c] || '💱';
+      const name = CONFIG.currencyNames[c] || c;
+      return `<option value="${c}">${flag} ${c} — ${name}</option>`;
+    }).join('');
+  });
+  
+  // Défauts
+  document.getElementById('calcFrom').value = 'TRY';
+  document.getElementById('calcTo').value = 'XOF';
+}
+
+function setupDirectionTabs() {
+  document.querySelectorAll('.direction-tab').forEach(tab => {
+    tab.addEventListener('click', function() {
+      document.querySelectorAll('.direction-tab').forEach(t => t.classList.remove('active'));
+      this.classList.add('active');
+      document.getElementById('calcFrom').value = this.dataset.from;
+      document.getElementById('calcTo').value = this.dataset.to;
+      calculateFull();
+    });
+  });
+}
+
+// ============ RATES ============
+async function fetchRates() {
+  try {
+    const resp = await fetch(`${CONFIG.apiBase}/TRY`);
+    const data = await resp.json();
+    if (data.result === 'success') {
+      state.rates = data.rates;
+      renderRates();
+      return data.rates;
+    }
+  } catch(e) {
+    console.warn('API indisponible');
+  }
+  
+  // Fallback sécurisé
+  state.rates = {
+    TRY:1, USD:0.031, EUR:0.028, GBP:0.024,
+    XOF:18.5, XAF:18.5, NGN:52, KES:4, GHS:0.38,
+    MAD:0.31, ZAR:0.52, EGP:0.96, TND:0.095, DZD:4.1
+  };
+  renderRates();
+  return state.rates;
+}
+
+function renderRates() {
+  const grid = document.getElementById('ratesGrid');
+  const currencies = Object.keys(state.rates).filter(c => 
+    CONFIG.africanCurrencies.includes(c) || 
+    ['EUR','USD','GBP'].includes(c)
+  ).slice(0, 18);
+  
+  grid.innerHTML = currencies.map(c => {
+    const rate = state.rates[c];
+    if (!rate) return '';
+    const flag = CONFIG.currencyFlags[c] || '💱';
+    const name = CONFIG.currencyNames[c] || c;
+    const formatted = rate >= 1 ? rate.toFixed(4) : rate.toFixed(6);
+    return `<div class="rate-card">
+      <div class="drapeau">${escapeHTML(flag)}</div>
+      <div class="code">${escapeHTML(c)}</div>
+      <div class="rate-value">${escapeHTML(formatted)}</div>
+      <div class="rate-name">${escapeHTML(name)}</div>
+    </div>`;
+  }).join('');
+}
+
+function getRate(from, to) {
+  if (!state.rates) return 0;
+  const rFrom = state.rates[from] || 1;
+  const rTo = state.rates[to] || 1;
+  return rFrom > 0 ? rTo / rFrom : 0;
+}
+
+function calculateTransfer(amount, from, to) {
+  const rate = getRate(from, to);
+  const rateToUSD = getRate(from, 'USD');
+  const amountUSD = amount * (rateToUSD || 0);
+  let feeUSD = amountUSD * (CONFIG.feePercent / 100);
+  if (feeUSD < CONFIG.minFeeUSD) feeUSD = CONFIG.minFeeUSD;
+  const feeSource = from === 'USD' ? feeUSD : feeUSD / (getRate('USD', from) || 1);
+  const netAmount = amount - feeSource;
+  const received = netAmount * rate;
+  
+  return {
+    rate, 
+    feePercent: CONFIG.feePercent,
+    feeSource: Math.round(feeSource * 100) / 100,
+    feeUSD: Math.round(feeUSD * 100) / 100,
+    netAmount: Math.round(netAmount * 100) / 100,
+    received: Math.round(received * 100) / 100
+  };
+}
+
+// ============ SIMULATEUR HERO ============
+function heroSimulate() {
+  const amount = parseFloat(document.getElementById('heroAmount').value) || 0;
+  const from = document.getElementById('heroFrom').value;
+  const to = document.getElementById('heroTo').value;
+  
+  if (amount <= 0 || !state.rates) {
+    document.getElementById('heroResult').value = '';
+    document.getElementById('heroSimInfo').textContent = 'Entrez un montant valide';
+    return;
+  }
+  
+  const calc = calculateTransfer(amount, from, to);
+  const receivedFormatted = calc.received.toLocaleString('fr-FR');
+  document.getElementById('heroResult').value = `${receivedFormatted} ${to}`;
+  
+  const flagFrom = CONFIG.currencyFlags[from] || '💱';
+  const flagTo = CONFIG.currencyFlags[to] || '💱';
+  document.getElementById('heroSimInfo').innerHTML = 
+    `Taux: <span class="highlight">1 ${from} = ${calc.rate.toFixed(6)} ${to}</span> · ` +
+    `Frais: <span class="highlight">${calc.feePercent}%</span> · ` +
+    `Vous recevez: <span class="highlight">${receivedFormatted} ${to}</span>`;
+}
+
+// ============ CALCULATEUR ============
+function calculateFull() {
+  const amount = parseFloat(document.getElementById('calcAmount').value) || 0;
+  const from = document.getElementById('calcFrom').value;
+  const to = document.getElementById('calcTo').value;
+  const resultDiv = document.getElementById('calcResult');
+  
+  if (amount <= 0 || !state.rates) {
+    showToast('Veuillez entrer un montant valide', 'error');
+    return;
+  }
+  
+  const calc = calculateTransfer(amount, from, to);
+  const flagFrom = CONFIG.currencyFlags[from] || '💱';
+  const flagTo = CONFIG.currencyFlags[to] || '💱';
+  
+  resultDiv.style.display = 'block';
+  resultDiv.innerHTML = `
+    <div class="calc-success">
+      <div class="calc-direction">${flagFrom} ${from} → ${flagTo} ${to}</div>
+      <div class="calc-flow">
+        <div class="calc-box">
+          <div class="amount">${amount.toLocaleString('fr-FR')}</div>
+          <div class="currency">${from} envoyé</div>
+        </div>
+        <div class="calc-arrow">→</div>
+        <div class="calc-box">
+          <div class="amount">${calc.received.toLocaleString('fr-FR')}</div>
+          <div class="currency">${to} reçu</div>
+        </div>
+      </div>
+      <div class="calc-details">
+        <div class="detail-row">
+          <span class="label">Taux de change</span>
+          <span class="value">1 ${from} = ${calc.rate.toFixed(6)} ${to}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Frais (${calc.feePercent}%)</span>
+          <span class="value red">-${calc.feeSource.toLocaleString('fr-FR')} ${from}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">Montant net envoyé</span>
+          <span class="value">${calc.netAmount.toLocaleString('fr-FR')} ${from}</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">📊 Bénéfice MultiTransfer</span>
+          <span class="value green">+${calc.feeSource.toLocaleString('fr-FR')} ${from} (${calc.feeUSD.toFixed(2)} USD)</span>
+        </div>
+        <div class="detail-row">
+          <span class="label">💰 Montant reçu par le bénéficiaire</span>
+          <span class="value green">${calc.received.toLocaleString('fr-FR')} ${to}</span>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ============ AUTH ============
+function openModal(tab) {
+  document.getElementById('authModal').classList.add('active');
+  switchAuthTab(tab);
+}
+
+function closeModal() {
+  document.getElementById('authModal').classList.remove('active');
+}
+
+function switchAuthTab(tab) {
+  document.querySelectorAll('.auth-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.auth-form').forEach(f => f.classList.remove('active'));
+  document.querySelector(`[data-tab="${tab}"]`).classList.add('active');
+  document.getElementById(`${tab}Form`).classList.add('active');
+  document.getElementById('loginError').style.display = 'none';
+  document.getElementById('registerError').style.display = 'none';
+}
+
+function handleRegister(e) {
+  e.preventDefault();
+  const name = document.getElementById('regName').value.trim();
+  const email = document.getElementById('regEmail').value.trim();
+  const phone = document.getElementById('regPhone').value.trim();
+  const password = document.getElementById('regPassword').value;
+  const errorEl = document.getElementById('registerError');
+  
+  // Vérifier si l'email existe déjà
+  if (state.users.find(u => u.email === email)) {
+    errorEl.textContent = 'Cet email est déjà utilisé';
+    errorEl.style.display = 'block';
+    return;
+  }
+  
+  const user = {
+    id: 'USR' + Date.now() + Math.random().toString(36).substr(2,4).toUpperCase(),
+    name: name,
+    email: email,
+    phone: phone,
+    password: btoa(password), // hash simple pour demo (à remplacer par bcrypt en prod)
+    balance: { TRY: 50000, EUR: 500, XOF: 0, NGN: 0, KES: 0, GHS: 0 },
+    createdAt: new Date().toISOString()
+  };
+  
+  state.users.push(user);
+  localStorage.setItem('mt_users', btoa(JSON.stringify(state.users)));
+  
+  // Auto-login après inscription
+  state.user = user;
+  saveSession();
+  updateAuthUI();
+  closeModal();
+  document.getElementById('dashboard').style.display = 'block';
+  updateDashboard();
+  showToast('✅ Compte créé avec succès !', 'success');
+}
+
+function handleLogin(e) {
+  e.preventDefault();
+  const email = document.getElementById('loginEmail').value.trim();
+  const password = document.getElementById('loginPassword').value;
+  const errorEl = document.getElementById('loginError');
+  
+  // Admin login
+  if (email === CONFIG.adminEmail && password === CONFIG.adminPassword) {
+    state.user = {
+      id: 'ADMIN',
+      name: 'Administrateur',
+      email: CONFIG.adminEmail,
+      role: 'admin'
+    };
+    saveSession();
+    updateAuthUI();
+    closeModal();
+    document.getElementById('adminPanel').style.display = 'block';
+    updateAdminPanel();
+    showToast('🔐 Connecté en tant qu\'administrateur', 'success');
+    return;
+  }
+  
+  // User login
+  const found = state.users.find(u => u.email === email && btoa(password) === u.password);
+  if (found) {
+    state.user = found;
+    saveSession();
+    updateAuthUI();
+    closeModal();
+    document.getElementById('dashboard').style.display = 'block';
+    updateDashboard();
+    showToast('✅ Connecté avec succès !', 'success');
+  } else {
+    errorEl.textContent = 'Email ou mot de passe incorrect';
+    errorEl.style.display = 'block';
+  }
+}
+
+function logout() {
+  state.user = null;
+  localStorage.removeItem('mt_session');
+  document.getElementById('dashboard').style.display = 'none';
+  document.getElementById('adminPanel').style.display = 'none';
+  document.getElementById('navAuth').style.display = 'flex';
+  document.getElementById('navUser').style.display = 'none';
+  updateAuthUI();
+  showToast('👋 Déconnecté', 'info');
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function saveSession() {
+  const data = {
+    user: state.user,
+    transfers: state.transfers,
+    checksum: btoa(JSON.stringify(state.user || '') + '|' + JSON.stringify(state.transfers || ''))
+  };
+  localStorage.setItem('mt_session', btoa(JSON.stringify(data)));
+}
+
+function updateAuthUI() {
+  if (state.user) {
+    document.getElementById('navAuth').style.display = 'none';
+    document.getElementById('navUser').style.display = 'flex';
+    document.getElementById('userGreeting').textContent = `👤 ${state.user.name}`;
+    document.getElementById('dashUserName').textContent = `👤 ${state.user.name}`;
+  } else {
+    document.getElementById('navAuth').style.display = 'flex';
+    document.getElementById('navUser').style.display = 'none';
+  }
+}
+
+// ============ DASHBOARD ============
+function showDashboard() {
+  document.getElementById('adminPanel').style.display = 'none';
+  document.getElementById('dashboard').style.display = 'block';
+  updateDashboard();
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function updateDashboard() {
+  if (!state.user) return;
+  updateWallet();
+  updateHistory();
+}
+
+function updateWallet() {
+  const grid = document.getElementById('walletGrid');
+  if (!state.user.balance) {
+    grid.innerHTML = '<div style="text-align:center;color:var(--text-light)">Portefeuille non disponible</div>';
+    return;
+  }
+  
+  grid.innerHTML = Object.keys(state.user.balance).map(curr => {
+    const bal = state.user.balance[curr];
+    const flag = CONFIG.currencyFlags[curr] || '💱';
+    const zeroClass = bal <= 0 ? 'zero' : '';
+    return `<div class="wallet-item">
+      <div class="curr">${flag} ${curr}</div>
+      <div class="bal ${zeroClass}">${bal.toLocaleString('fr-FR')}</div>
+    </div>`;
+  }).join('');
+}
+
+function updateHistory() {
+  const tbody = document.getElementById('historyBody');
+  const userTransfers = state.transfers.filter(t => t.userId === state.user.id);
+  
+  if (userTransfers.length === 0) {
+    tbody.innerHTML = '<tr><td colspan="8" style="text-align:center;color:var(--text-light)">Aucun transfert pour le moment</td></tr>';
+    return;
+  }
+  
+  tbody.innerHTML = userTransfers.sort((a,b) => new Date(b.date) - new Date(a.date)).map(t => {
+    const statusClass = `status-${t.status}`;
+    const statusLabels = { pending: '⏳ En attente', processing: '🔄 En cours', completed: '✅ Complété', failed: '❌ Échoué' };
+    return `<tr>
+      <td>${new Date(t.date).toLocaleDateString('fr-FR')}</td>
+      <td>${t.from} → ${t.to}</td>
+      <td>${t.amount.toLocaleString('fr-FR')} ${t.from}</td>
+      <td>${t.received.toLocaleString('fr-FR')} ${t.to}</td>
+      <td>${escapeHTML(t.recipient)}</td>
+      <td>${escapeHTML(t.phone)}</td>
+      <td>${escapeHTML(t.country)}</td>
+      <td><span class="status-badge ${statusClass}">${statusLabels[t.status] || t.status}</span></td>
+    </tr>`;
+  }).join('');
+}
+
+function depositDemo() {
+  if (!state.user) return;
+  state.user.balance.TRY += 50000;
+  state.user.balance.EUR += 500;
+  saveSession();
+  // Mettre à jour l'utilisateur dans la liste
+  const idx = state.users.findIndex(u => u.id === state.user.id);
+  if (idx !== -1) state.users[idx] = state.user;
+  localStorage.setItem('mt_users', btoa(JSON.stringify(state.users)));
+  updateWallet();
+  showToast('💰 50 000 TRY et 500 EUR ajoutés à votre portefeuille', 'success');
+}
+
+// ============ TRANSFERT ============
+function handleTransfer(e) {
+  e.preventDefault();
+  
+  if (!state.user) {
+    showToast('Veuillez vous connecter pour effectuer un transfert', 'error');
+    return;
+  }
+  
+  const amount = parseFloat(document.getElementById('sendAmount').value);
+  const from = document.getElementById('sendFrom').value;
+  const to = document.getElementById('sendTo').value;
+  const recipient = document.getElementById('sendRecipient').value.trim();
+  const phone = document.getElementById('sendPhone').value.trim();
+  const benefEmail = document.getElementById('sendBenefEmail').value.trim();
+  const country = document.getElementById('sendCountry').value;
+  const city = document.getElementById('sendBenefCity').value.trim();
+  const benefID = document.getElementById('sendBenefID').value.trim();
+  const method = document.getElementById('sendMethod').value;
+  const provider = document.getElementById('sendProvider').value;
+  const bank = document.getElementById('sendBank') ? document.getElementById('sendBank').value.trim() : '';
+  const bankAccount = document.getElementById('sendBankAccount') ? document.getElementById('sendBankAccount').value.trim() : '';
+  
+  // Validation
+  if (!recipient || !phone) {
+    showToast('Veuillez remplir les informations du bénéficiaire', 'error');
+    return;
+  }
+  
+  if (amount <= 0) {
+    showToast('Montant invalide', 'error');
+    return;
+  }
+  
+  if (from === to) {
+    showToast('Les devises source et destination doivent être différentes', 'error');
+    return;
+  }
+  
+  // Vérifier solde
+  if (state.user.balance && (state.user.balance[from] || 0) < amount) {
+    showToast(`Solde insuffisant en ${from}. Solde: ${(state.user.balance[from] || 0).toLocaleString('fr-FR')} ${from}`, 'error');
+    return;
+  }
+  
+  const calc = calculateTransfer(amount, from, to);
+  
+  // Générer ID de transaction
+  const txID = 'MT' + Date.now().toString(36).toUpperCase() + Math.random().toString(36).substr(2,4).toUpperCase();
+  
+  // Créer la transaction
+  const transfer = {
+    id: txID,
+    userId: state.user.id,
+    userName: state.user.name,
+    userEmail: state.user.email,
+    userPhone: state.user.phone,
+    date: new Date().toISOString(),
+    amount: amount,
+    from: from,
+    to: to,
+    rate: calc.rate,
+    fee: calc.feeSource,
+    feeUSD: calc.feeUSD,
+    netAmount: calc.netAmount,
+    received: calc.received,
+    recipient: recipient,
+    phone: phone,
+    benefEmail: benefEmail,
+    country: country,
+    city: city,
+    benefID: benefID,
+    method: method,
+    provider: provider,
+    bank: bank,
+    bankAccount: bankAccount,
+    status: 'pending'
+  };
+  
+  state.transfers.push(transfer);
+  
+  // Débiter le compte de l'utilisateur
+  if (state.user.balance) {
+    state.user.balance[from] = (state.user.balance[from] || 0) - amount;
+  }
+  
+  saveSession();
+  // Mettre à jour l'utilisateur dans la liste
+  const idx = state.users.findIndex(u => u.id === state.user.id);
+  if (idx !== -1) {
+    state.users[idx] = state.user;
+    localStorage.setItem('mt_users', btoa(JSON.stringify(state.users)));
+  }
+  
+  updateDashboard();
+  
+  // Afficher le récapitulatif et le bouton WhatsApp
+  const previewDiv = document.getElementById('sendPreview');
+  const countryName = document.getElementById('sendCountry').options[document.getElementById('sendCountry').selectedIndex].text;
+  const methodName = document.getElementById('sendMethod').options[document.getElementById('sendMethod').selectedIndex].text;
+  
+  previewDiv.style.display = 'block';
+  previewDiv.innerHTML = `
+    <div style="font-weight:700;margin-bottom:10px">✅ Demande de transfert enregistrée !</div>
+    <div style="margin-bottom:12px;font-size:0.9rem">
+      <div>📋 Référence: <strong>${txID}</strong></div>
+      <div>💵 ${amount.toLocaleString('fr-FR')} ${from} → ${calc.received.toLocaleString('fr-FR')} ${to}</div>
+      <div>👤 Bénéficiaire: ${escapeHTML(recipient)}</div>
+      <div>📞 Téléphone: ${escapeHTML(phone)}</div>
+      <div>🌍 Pays: ${escapeHTML(countryName)}</div>
+      <div>💳 Méthode: ${escapeHTML(methodName)}</div>
+      <div>💰 Frais (5%): ${calc.feeSource.toLocaleString('fr-FR')} ${from}</div>
+    </div>
+    <div style="background:#e8f5e9;border-radius:8px;padding:12px;margin-bottom:10px;text-align:center">
+      <div style="font-size:0.9rem;margin-bottom:8px">📱 Contactez-nous sur WhatsApp pour finaliser le transfert :</div>
+      <a href="${generateWhatsAppLink(transfer)}" target="_blank" class="btn btn-whatsapp" style="font-size:1rem;padding:12px 28px">
+        💬 Finaliser sur WhatsApp
+      </a>
+    </div>
+    <div style="font-size:0.8rem;color:var(--text-light);text-align:center">
+      Vous allez être redirigé vers WhatsApp. Veuillez envoyer le message pré-rempli.
+    </div>
+  `;
+  
+  // Marquer le status
+  document.getElementById('submitTransferBtn').textContent = '✅ Demande envoyée !';
+  document.getElementById('submitTransferBtn').disabled = true;
+  document.getElementById('submitTransferBtn').style.opacity = '0.7';
+  
+  showToast('✅ Demande de transfert enregistrée ! Contactez-nous sur WhatsApp pour finaliser.', 'success');
+  
+  // Ouvrir WhatsApp après 1 seconde
+  setTimeout(() => {
+    const waLink = generateWhatsAppLink(transfer);
+    window.open(waLink, '_blank');
+  }, 1500);
+}
+
+function generateWhatsAppLink(transfer) {
+  const adminPhone = state.adminSettings.whatsapp.replace(/[^0-9]/g, '');
+  const lang = state.adminSettings.lang || 'fr';
+  
+  let message = '';
+  
+  if (lang === 'fr') {
+    message = `🟢 *NOUVEAU TRANSFERT - MultiTransfer* 🟢\n\n` +
+      `📋 *Référence:* ${transfer.id}\n` +
+      `👤 *Expéditeur:* ${transfer.userName}\n` +
+      `📧 *Email:* ${transfer.userEmail}\n` +
+      `📞 *Tél. expéditeur:* ${transfer.userPhone}\n\n` +
+      `━━━━━━━━━━━━━━━━━━\n\n` +
+      `💵 *Montant envoyé:* ${transfer.amount.toLocaleString('fr-FR')} ${transfer.from}\n` +
+      `💰 *Montant reçu:* ${transfer.received.toLocaleString('fr-FR')} ${transfer.to}\n` +
+      `📊 *Taux:* 1 ${transfer.from} = ${transfer.rate.toFixed(6)} ${transfer.to}\n` +
+      `💲 *Frais (5%):* ${transfer.fee.toLocaleString('fr-FR')} ${transfer.from} (${transfer.feeUSD.toFixed(2)} USD)\n\n` +
+      `━━━━━━━━━━━━━━━━━━\n\n` +
+      `👤 *BÉNÉFICIAIRE:*\n` +
+      `• Nom: ${transfer.recipient}\n` +
+      `• Téléphone: ${transfer.phone}\n` +
+      `• Email: ${transfer.benefEmail || 'Non renseigné'}\n` +
+      `• Pays: ${transfer.country}\n` +
+      `• Ville: ${transfer.city}\n` +
+      `• Pièce d'identité: ${transfer.benefID || 'Non renseignée'}\n\n` +
+      `💳 *Méthode de réception:* ${transfer.method}\n` +
+      `📱 *Opérateur:* ${transfer.provider}\n` +
+      `${transfer.bank ? `🏦 *Banque:* ${transfer.bank}\n` : ''}` +
+      `${transfer.bankAccount ? `💳 *Compte:* ${transfer.bankAccount}\n` : ''}` +
+      `\n━━━━━━━━━━━━━━━━━━\n\n` +
+      `⏳ *Statut:* EN ATTENTE DE TRAITEMENT\n` +
+      `📅 *Date:* ${new Date(transfer.date).toLocaleString('fr-FR')}\n\n` +
+      `Merci de traiter cette transaction dès que possible. 🙏`;
+  } else if (lang === 'en') {
+    message = `🟢 *NEW TRANSFER - MultiTransfer* 🟢\n\n` +
+      `📋 *Reference:* ${transfer.id}\n` +
+      `👤 *Sender:* ${transfer.userName}\n` +
+      `📧 *Email:* ${transfer.userEmail}\n` +
+      `📞 *Phone:* ${transfer.userPhone}\n\n` +
+      `━━━━━━━━━━━━━━━━━━\n\n` +
+      `💵 *Amount sent:* ${transfer.amount.toLocaleString('en-US')} ${transfer.from}\n` +
+      `💰 *Amount received:* ${transfer.received.toLocaleString('en-US')} ${transfer.to}\n` +
+      `📊 *Rate:* 1 ${transfer.from} = ${transfer.rate.toFixed(6)} ${transfer.to}\n` +
+      `💲 *Fee (5%):* ${transfer.fee.toLocaleString('en-US')} ${transfer.from} (${transfer.feeUSD.toFixed(2)} USD)\n\n` +
+      `━━━━━━━━━━━━━━━━━━\n\n` +
+      `👤 *BENEFICIARY:*\n` +
+      `• Name: ${transfer.recipient}\n` +
+      `• Phone: ${transfer.phone}\n` +
+      `• Email: ${transfer.benefEmail || 'Not provided'}\n` +
+      `• Country: ${transfer.country}\n` +
+      `• City: ${transfer.city}\n` +
+      `• ID: ${transfer.benefID || 'Not provided'}\n\n` +
+      `💳 *Payment method:* ${transfer.method}\n` +
+      `📱 *Operator:* ${transfer.provider}\n` +
+      `${transfer.bank ? `🏦 *Bank:* ${transfer.bank}\n` : ''}` +
+      `${transfer.bankAccount ? `💳 *Account:* ${transfer.bankAccount}\n` : ''}` +
+      `\n━━━━━━━━━━━━━━━━━━\n\n` +
+      `⏳ *Status:* PENDING\n` +
+      `📅 *Date:* ${new Date(transfer.date).toLocaleString('en-US')}\n\n` +
+      `Please process this transaction as soon as possible. 🙏`;
+  } else {
+    message = `🟢 *تحويل جديد - MultiTransfer* 🟢\n\n` +
+      `📋 *المرجع:* ${transfer.id}\n` +
+      `👤 *المرسل:* ${transfer.userName}\n` +
+      `📧 *البريد:* ${transfer.userEmail}\n` +
+      `📞 *هاتف:* ${transfer.userPhone}\n\n` +
+      `━━━━━━━━━━━━━━━━━━\n\n` +
+      `💵 *المبلغ المرسل:* ${transfer.amount.toLocaleString()} ${transfer.from}\n` +
+      `💰 *المبلغ المستلم:* ${transfer.received.toLocaleString()} ${transfer.to}\n` +
+      `📊 *سعر الصرف:* 1 ${transfer.from} = ${transfer.rate.toFixed(6)} ${transfer.to}\n` +
+      `💲 *الرسوم (5%):* ${transfer.fee.toLocaleString()} ${transfer.from} (${transfer.feeUSD.toFixed(2)} USD)\n\n` +
+      `━━━━━━━━━━━━━━━━━━\n\n` +
+      `👤 *المستفيد:*\n` +
+      `• الاسم: ${transfer.recipient}\n` +
+      `• الهاتف: ${transfer.phone}\n` +
+      `• البريد: ${transfer.benefEmail || 'غير مقدم'}\n` +
+      `• الدولة: ${transfer.country}\n` +
+      `• المدينة: ${transfer.city}\n` +
+      `• الهوية: ${transfer.benefID || 'غير مقدم'}\n\n` +
+      `💳 *طريقة الاستلام:* ${transfer.method}\n` +
+      `📱 *المشغل:* ${transfer.provider}\n` +
+      `${transfer.bank ? `🏦 *البنك:* ${transfer.bank}\n` : ''}` +
+      `${transfer.bankAccount ? `💳 *الحساب:* ${transfer.bankAccount}\n` : ''}` +
+      `\n━━━━━━━━━━━━━━━━━━\n\n` +
+      `⏳ *الحالة:* قيد الانتظار\n` +
+      `📅 *التاريخ:* ${new Date(transfer.date).toLocaleString('ar-SA')}\n\n` +
+      `يرجى معالجة هذه المعاملة في أقرب وقت ممكن. 🙏`;
+  }
+  
+  return `https://wa.me/${adminPhone}?text=${encodeURIComponent(message)}`;
+}
+
+// ============ ADMIN PANEL ============
+function updateAdminPanel() {
+  document.getElementById('adminGreeting').textContent = `👤 ${state.user.name}`;
+  
+  const totalTransfers = state.transfers.length;
+  document.getElementById('statTotal').textContent = totalTransfers;
+  
+  const pending = state.transfers.filter(t => t.status === 'pending');
+  document.getElementById('statPending').textContent = pending.length;
+  
+  const totalRevenue = state.transfers.reduce((sum, t) => sum + (t.feeUSD || 0), 0);
+  document.getElementById('statRevenue').textContent = totalRevenue.toFixed(2) + ' $';
+  
+  document.getElementById('statUsers').textContent = state.users.length;
+  
+  // Afficher les transferts en attente
+  const container = document.getElementById('pendingTransfers');
+  
+  if (pending.length === 0) {
+    container.innerHTML = '<div style="text-align:center;color:var(--text-light);padding:30px">✅ Aucune transaction en attente</div>';
+    return;
+  }
+  
+  container.innerHTML = pending.sort((a,b) => new Date(b.date) - new Date(a.date)).map(t => {
+    const countrySelect = document.getElementById('sendCountry');
+    const countryName = countrySelect ? 
+      [...countrySelect.options].find(o => o.value === t.country)?.text || t.country : t.country;
+    const methodNames = {
+      mobile_money: '📱 Mobile Money',
+      bank_transfer: '🏦 Virement bancaire',
+      wise: '💶 Wise',
+      cash_pickup: '💵 Retrait cash'
+    };
+    
+    return `<div class="pending-card">
+      <div class="p-header">
+        <span class="p-id">📋 ${t.id}</span>
+        <span class="p-status">⏳ En attente</span>
+      </div>
+      <div class="p-details">
+        <div><strong>Date:</strong> ${new Date(t.date).toLocaleString('fr-FR')}</div>
+        <div><strong>Expéditeur:</strong> ${escapeHTML(t.userName)} (${escapeHTML(t.userEmail)})</div>
+        <div><strong>Bénéficiaire:</strong> ${escapeHTML(t.recipient)} — ${escapeHTML(t.phone)}</div>
+        <div><strong>Pays:</strong> ${escapeHTML(countryName)} — ${escapeHTML(t.city)}</div>
+        <div><strong>Montant:</strong> ${t.amount.toLocaleString('fr-FR')} ${t.from} → ${t.received.toLocaleString('fr-FR')} ${t.to}</div>
+        <div><strong>Taux:</strong> 1 ${t.from} = ${t.rate.toFixed(6)} ${t.to}</div>
+        <div><strong>💰 Revenu (5%):</strong> ${t.fee.toLocaleString('fr-FR')} ${t.from} (${t.feeUSD.toFixed(2)} USD)</div>
+        <div><strong>Méthode:</strong> ${methodNames[t.method] || t.method} — ${t.provider}</div>
+        ${t.benefEmail ? `<div><strong>Email bénéficiaire:</strong> ${escapeHTML(t.benefEmail)}</div>` : ''}
+        ${t.benefID ? `<div><strong>Pièce d'identité:</strong> ${escapeHTML(t.benefID)}</div>` : ''}
+        ${t.bank ? `<div><strong>Banque:</strong> ${escapeHTML(t.bank)} — ${escapeHTML(t.bankAccount)}</div>` : ''}
+      </div>
+      <div class="p-actions">
+        <a href="${generateWhatsAppLink(t)}" target="_blank" class="btn btn-whatsapp btn-sm">
+          💬 WhatsApp
+        </a>
+        <button class="btn btn-success btn-sm" onclick="markTransferCompleted('${t.id}')">
+          ✅ Marquer complété
+        </button>
+        <button class="btn btn-sm" onclick="markTransferFailed('${t.id}')" style="background:var(--danger);color:#fff">
+          ❌ Annuler
+        </button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function markTransferCompleted(id) {
+  const t = state.transfers.find(t => t.id === id);
+  if (t) {
+    t.status = 'completed';
+    saveSession();
+    updateAdminPanel();
+    updateHistory();
+    showToast(`✅ Transfert ${id} marqué comme complété`, 'success');
+  }
+}
+
+function markTransferFailed(id) {
+  const t = state.transfers.find(t => t.id === id);
+  if (t) {
+    t.status = 'failed';
+    // Rembourser l'utilisateur
+    const user = state.users.find(u => u.id === t.userId);
+    if (user && user.balance) {
+      user.balance[t.from] = (user.balance[t.from] || 0) + t.amount;
+    }
+    saveSession();
+    localStorage.setItem('mt_users', btoa(JSON.stringify(state.users)));
+    updateAdminPanel();
+    updateHistory();
+    showToast(`❌ Transfert ${id} annulé et remboursé`, 'error');
+  }
+}
+
+function testWhatsApp() {
+  const testTransfer = {
+    id: 'MT-TEST-' + Date.now(),
+    userName: 'Test Utilisateur',
+    userEmail: 'test@exemple.com',
+    userPhone: '+905395856977',
+    amount: 1000,
+    from: 'EUR',
+    to: 'XOF',
+    rate: 655.957,
+    fee: 2.5,
+    feeUSD: 2.50,
+    received: 654000,
+    recipient: 'Jean Dupont',
+    phone: '+2250102030405',
+    benefEmail: 'jean@exemple.com',
+    country: 'CI',
+    city: 'Abidjan',
+    benefID: 'CNI 123456',
+    method: 'mobile_money',
+    provider: 'MTN',
+    bank: '',
+    bankAccount: '',
+    date: new Date().toISOString()
+  };
+  
+  const waLink = generateWhatsAppLink(testTransfer);
+  window.open(waLink, '_blank');
+  showToast('🔍 Test WhatsApp ouvert dans un nouvel onglet', 'info');
+}
+
+function saveAdminSettings() {
+  const wa = document.getElementById('adminWhatsApp').value.trim();
+  const lang = document.getElementById('whatsappLang').value;
+  
+  state.adminSettings.whatsapp = wa;
+  state.adminSettings.lang = lang;
+  
+  localStorage.setItem('mt_admin_settings', btoa(JSON.stringify(state.adminSettings)));
+  showToast('💾 Paramètres sauvegardés', 'success');
+}
+
+// ============ TOAST ============
+function showToast(message, type = 'info') {
+  const toast = document.getElementById('toast');
+  toast.textContent = message;
+  toast.className = `toast ${type}`;
+  toast.classList.add('show');
+  
+  setTimeout(() => {
+    toast.classList.remove('show');
+  }, 5000);
+}
+
+// ============ UI HELPERS ============
+function scrollToTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+function toggleMobileMenu() {
+  document.getElementById('navLinks').classList.toggle('open');
+}
+
+function closeMobileMenu() {
+  document.getElementById('navLinks').classList.remove('open');
+}
+</script>
+</body>
+</html>
